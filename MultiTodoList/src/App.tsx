@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { FaPlus } from 'react-icons/fa'
+import { MdDelete } from "react-icons/md";
 import './App.css'
 
 function App() {
@@ -7,21 +9,24 @@ function App() {
   return (
     <>
       <div className='flex flex-col md:justify-between md:flex-row'>
-        <h1 className='font-sans text-4xl' >Multi ToDo</h1>
-        <div className='space-x-4'>
-          <button className='bg-green-300 p-1'>
-            Add New Lists
-          </button>
-          <button className='bg-rose-500 p-1'>
-            Delete All Lists
-          </button>
+        <h1 className='font-sans text-3xl font-semibold text-slate-900' >Multi ToDo</h1>
+        <div className='space-x-2 text-white inline-flex items-baseline'>
+          <div className='bg-green-500 rounded py-1 px-3 inline-flex items-baseline space-x-1.5'>
+          <FaPlus className='scale-110'/>
+          <span className=''>Add New Lists</span>
+          </div>
+
+          <div className='bg-rose-500 rounded py-1 px-3 inline-flex items-baseline space-x-1.5'>
+          <MdDelete className='scale-125'/>
+          <span className=''>Delete All Lists</span>
+          </div>
         </div>
 
       </div>
-      <div className="">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <div className='flex items-center justify-center h-80'>
+        <span onClick={() => setCount((count) => count + 1)}>
+        You currently have no lists. Click Count: {count}
+        </span>
       </div>
     </>
   )
