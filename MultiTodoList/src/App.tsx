@@ -6,9 +6,9 @@ function App() {
 
   return (
     <>
-      <div className='flex-row sm:flex-col'>
-        <h1 className='items-start font-sans text-4xl' >Multi ToDo</h1>
-        <div className='space-x-4 text-right items-end'>
+      <div className='flex flex-col md:justify-between md:flex-row'>
+        <h1 className='font-sans text-4xl' >Multi ToDo</h1>
+        <div className='space-x-4'>
           <button className='bg-green-300 p-1'>
             Add New Lists
           </button>
