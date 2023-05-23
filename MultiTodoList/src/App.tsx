@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { FaPlus } from 'react-icons/fa'
 import { MdDelete } from "react-icons/md";
 import './App.css'
+import MainButton from './components/MainButton';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,16 +11,9 @@ function App() {
     <>
       <div className='flex flex-col md:justify-between md:flex-row'>
         <h1 className='font-sans text-3xl font-semibold text-slate-900' >Multi ToDo</h1>
-        <div className='space-x-2 text-white inline-flex items-baseline'>
-          <div className='bg-green-500 rounded py-1 px-3 inline-flex items-baseline space-x-1.5 cursor-pointer hover:bg-green-600'>
-          <FaPlus className='scale-110'/>
-          <span className='' /*onClick={() => ()}*/>Add New Lists</span>
-          </div>
-
-          <div className='bg-rose-300 rounded py-1 px-3 inline-flex items-baseline space-x-1.5 cursor-pointer hover:bg-rose-500'>
-          <MdDelete className='scale-125'/>
-          <span className=''>Delete All Lists</span>
-          </div>
+        <div className='space-x-2 text-white inline-flex items-baselin justify-center'>
+          <MainButton variant='addList'/>
+          <MainButton variant='deleteList'/>
         </div>
 
       </div>
