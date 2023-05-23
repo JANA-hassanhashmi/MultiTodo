@@ -2,15 +2,18 @@ import { useState } from 'react'
 import './App.css'
 import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
+import OutderToDo from './components/OutderToDo';
 
 
 type innerToDo = {
+  id: number;
   text: string;
   isDone: boolean;
   dueDate: Date;
 }
 
 type outerToDo = {
+  id: number;
   title: string;
   innerToDoList: innerToDo[];
 }
@@ -22,11 +25,12 @@ function App() {
 
   const handleAdd = () => {
     const blankTodo: outerToDo = {
+      id: Date.now(),
       title: "Click me to edit title",
       innerToDoList:[]
     };
-
-    outerToDoList.push(blankTodo)
+    
+    setOuterToDoList(oldValue => ([...oldValue, blankTodo]))
     console.log(outerToDoList)
   }
 
@@ -54,11 +58,21 @@ function App() {
         </div>
 
       </div>
-      <div className='flex items-center justify-center h-80'>
+
+      {
+        (outerToDoList.length === 0) ? (
+        <div className='flex items-center justify-center h-80'>
         <span onClick={() => setCount((count) => count + 1)}>
         You currently have no lists. Click Count: {count}
         </span>
-      </div>
+        </div>) : (
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+          {outerToDoList.map( outerToDo =>(<OutderToDo />))}
+          
+        </div>
+      )
+      };
+      
     </>
   )
 }
