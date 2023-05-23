@@ -1,11 +1,23 @@
-import { useState } from 'react'
-import { FaPlus } from 'react-icons/fa'
-import { MdDelete } from "react-icons/md";
+import { useState, useReducer } from 'react'
 import './App.css'
 import MainButton from './components/MainButton';
 
+
+type innerToDo = {
+  text: string;
+  isDone: boolean;
+  dueDate: Date;
+}
+
+type outerToDo = {
+  title: string;
+  innerToDoList: innerToDo[];
+}
+
 function App() {
   const [count, setCount] = useState(0)
+
+  const [outerToDoList, setOuterToDoList] = useState<outerToDo[]>([]);
 
   return (
     <>
