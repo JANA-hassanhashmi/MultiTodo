@@ -5,18 +5,20 @@ import { MdDelete } from "react-icons/md";
 
 interface Props {
     variant: string;
-    handleAdd: () => void;
+    handleClick: () => void;
 }
-const MainButton: React.FC<Props>  = ({variant, handleAdd}) => {
+const MainButton: React.FC<Props>  = ({variant, handleClick}) => {
   return (
     (variant == "addList") ? (
         <div 
         className='bg-green-500 rounded py-1 px-3 inline-flex items-baseline space-x-1.5 cursor-pointer hover:bg-green-600'
-        onClick={ () => {handleAdd()}}>
+        onClick={ () => {handleClick()}}>
         <FaPlus className='scale-110'/>
         <span className=''>Add New Lists</span>
         </div>):(
-        <div className='bg-rose-300 rounded py-1 px-3 inline-flex items-baseline space-x-1.5 cursor-pointer hover:bg-rose-500'>
+        
+        <div className='bg-rose-300 rounded py-1 px-3 inline-flex items-baseline space-x-1.5 cursor-pointer hover:bg-rose-500'
+        onClick={ () => {handleClick()}}>
         <MdDelete className='scale-125'/>
         <span className=''>Delete All Lists</span>
         </div>
