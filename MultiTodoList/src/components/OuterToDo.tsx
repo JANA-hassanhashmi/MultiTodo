@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import InnerToDo, { innerToDo } from "./InnerToDo";
+import InputField from './InputField';
 
 
 export type outerToDo = {
@@ -8,7 +9,20 @@ export type outerToDo = {
     innerToDoList: innerToDo[];
   }
 
+
+
+
+//const [innerToDoList, setInnerToDoList] = useState<innerToDo[]>([]);
+
 const OuterToDo: React.FC<outerToDo> = ({id, title, innerToDoList}) => {
+  
+  const handleAddInnerItem = (e: React.FormEvent) => {
+    e.preventDefault();
+    innerToDoList.push({id: Date.now(), text: e.target})
+    
+    
+  }
+  
   return (
     <div>
       <span>{title}</span>
@@ -18,6 +32,7 @@ const OuterToDo: React.FC<outerToDo> = ({id, title, innerToDoList}) => {
       text={innerToDo.text} 
       isDone={innerToDo.isDone}
       dueDate={innerToDo.dueDate} />))}
+      <InputField handleAddInnerItem={handleAddInnerItem}/>
     </div>
   )
 }

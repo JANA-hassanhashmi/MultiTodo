@@ -11,9 +11,13 @@ export type innerToDo = {
 
 const InnerToDo: React.FC<innerToDo> = ({id, text, isDone, dueDate}) => {
   return (
-    <div>
-        <input type='checkbox' />
-        <span>{text}</span>
+    // <div className=''>
+    //     <input type='checkbox' />
+    //     <span>{text}</span>
+    // </div>
+    <div className="flex items-center">
+    <input type="checkbox" className="mr-2" />
+    <span className="text-gray-800">{text}</span>
     </div>
     
   )

@@ -4,26 +4,34 @@ import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
 import  OuterDisplay  from "./components/OuterDisplay";
 import { outerToDo } from './components/OuterToDo';
+import { innerToDo } from './components/InnerToDo';
 
 
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   const [outerToDoList, setOuterToDoList] = useState<outerToDo[]>([]);
+  const [outerToDo, setOuterToDo] = useState<outerToDo>({id: 1, title:"garbage title", innerToDoList:[]});
+
+ 
+  const [innerToDo, setInnerToDo] = useState<innerToDo>({id: 0, isDone: false, text:"initial dummy text", dueDate: "test Date"});
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleAdd = () => {
-    const blankTodo: outerToDo = {
-      id: Date.now(),
-      title: "Click me to edit title",
-      innerToDoList:[{id: 1, isDone: false, text:"test text", dueDate: "test Date"}]
+
+    const testOuter: outerToDo = {
+      id: Date.now(), 
+      title: "Click me to edit title", 
+      innerToDoList: [
+        {id: 1, isDone: false, text:"test text 1", dueDate: "test Date 1"},
+        {id: 2, isDone: false, text:"test text 2", dueDate: "test Date 2"}]
     };
-    
-    setOuterToDoList(oldValue => ([...oldValue, blankTodo]))
+
+    setOuterToDoList(oldValue => ([...oldValue, testOuter]))
   }
 
    const handleDeleteClicked = () => {
