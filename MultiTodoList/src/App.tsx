@@ -2,21 +2,11 @@ import { useState } from 'react'
 import './App.css'
 import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
-import OutderToDo from './components/OutderToDo';
+import  OuterDisplay  from "./components/OuterDisplay";
 
 
-type innerToDo = {
-  id: number;
-  text: string;
-  isDone: boolean;
-  dueDate: Date;
-}
 
-type outerToDo = {
-  id: number;
-  title: string;
-  innerToDoList: innerToDo[];
-}
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,7 +21,6 @@ function App() {
     };
     
     setOuterToDoList(oldValue => ([...oldValue, blankTodo]))
-    console.log(outerToDoList)
   }
 
    const handleDeleteClicked = () => {
@@ -66,10 +55,7 @@ function App() {
         You currently have no lists. Click Count: {count}
         </span>
         </div>) : (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {outerToDoList.map( outerToDo =>(<OutderToDo />))}
-          
-        </div>
+        <OuterDisplay outerToDoList={outerToDoList}/>
       )
       };
       
