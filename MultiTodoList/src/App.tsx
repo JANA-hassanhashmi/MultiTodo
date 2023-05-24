@@ -3,6 +3,7 @@ import './App.css'
 import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
 import  OuterDisplay  from "./components/OuterDisplay";
+import { outerToDo } from './components/OuterToDo';
 
 
 
@@ -13,11 +14,13 @@ function App() {
 
   const [outerToDoList, setOuterToDoList] = useState<outerToDo[]>([]);
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const handleAdd = () => {
     const blankTodo: outerToDo = {
       id: Date.now(),
       title: "Click me to edit title",
-      innerToDoList:[]
+      innerToDoList:[{id: 1, isDone: false, text:"test text", dueDate: "test Date"}]
     };
     
     setOuterToDoList(oldValue => ([...oldValue, blankTodo]))
@@ -28,11 +31,13 @@ function App() {
       setIsPopupOpen(true);
    }
 
-   const [isPopupOpen, setIsPopupOpen] = useState(false);
+   
 
    const handleClosePopup = () => {
     setIsPopupOpen(false);
   };
+
+
   return (
     <> 
 

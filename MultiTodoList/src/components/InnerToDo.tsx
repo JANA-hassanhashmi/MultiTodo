@@ -6,12 +6,16 @@ export type innerToDo = {
     id: number;
     text: string;
     isDone: boolean;
-    dueDate: Date;
+    dueDate: string;
   }
 
-const InnerToDo: React.FC<innerToDo> = () => {
+const InnerToDo: React.FC<innerToDo> = ({id, text, isDone, dueDate}) => {
   return (
-    <div>InnerToDo</div>
+    <div>
+        <input type='checkbox' />
+        <span>{text}</span>
+    </div>
+    
   )
 }
 

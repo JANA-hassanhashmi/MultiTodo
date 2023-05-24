@@ -1,5 +1,5 @@
 import React from 'react'
-import { innerToDo } from "./InnerToDo";
+import InnerToDo, { innerToDo } from "./InnerToDo";
 
 
 export type outerToDo = {
@@ -10,7 +10,15 @@ export type outerToDo = {
 
 const OuterToDo: React.FC<outerToDo> = ({id, title, innerToDoList}) => {
   return (
-    <div>OuterToDo</div>
+    <div>
+      <span>{title}</span>
+      {innerToDoList.map(innerToDo => (
+      <InnerToDo 
+      id={innerToDo.id} 
+      text={innerToDo.text} 
+      isDone={innerToDo.isDone}
+      dueDate={innerToDo.dueDate} />))}
+    </div>
   )
 }
 
