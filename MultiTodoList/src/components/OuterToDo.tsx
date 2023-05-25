@@ -1,38 +1,52 @@
-import React, { useState } from 'react'
-import InnerToDo, { innerToDo } from "./InnerToDo";
+import React, { useRef, useState } from 'react'
 import InputField from './InputField';
+import { innerToDo, outerToDo } from '../model';
+import InnerToDo from './InnerToDo';
 
 
-export type outerToDo = {
-    id: number;
-    title: string;
-    innerToDoList: innerToDo[];
-  }
 
+
+interface Props {
+  outerToDo: outerToDo
+}
 
 
 
 //const [innerToDoList, setInnerToDoList] = useState<innerToDo[]>([]);
 
-const OuterToDo: React.FC<outerToDo> = ({id, title, innerToDoList}) => {
+const OuterToDo: React.FC<Props> = ({outerToDo}) => {
   
+  const [innerToDoList, setInnerToDoList] = useState<innerToDo[]>(outerToDo.innerToDoList);
+  const [inputField, setinputField] = useState<string>("");
+
   const handleAddInnerItem = (e: React.FormEvent) => {
-    e.preventDefault();
-    innerToDoList.push({id: Date.now(), text: e.target})
-    
-    
+   e.preventDefault();
+   setInnerToDoList((oldValue) => [...oldValue, createInnerToDo(inputField)]);
+  }
+
+  const createInnerToDo = (innerText: string) => {
+    return {
+      id: Date.now(),
+      isDone: false,
+      text: innerText,
+      dueDate: ""
+    }
   }
   
   return (
     <div>
-      <span>{title}</span>
+      <span>{outerToDo.title}</span>
       {innerToDoList.map(innerToDo => (
       <InnerToDo 
       id={innerToDo.id} 
       text={innerToDo.text} 
       isDone={innerToDo.isDone}
       dueDate={innerToDo.dueDate} />))}
-      <InputField handleAddInnerItem={handleAddInnerItem}/>
+      <InputField 
+      inputField={inputField}
+      setinputField={setinputField}
+      handleAddInnerItem={handleAddInnerItem}
+      />
     </div>
   )
 }
