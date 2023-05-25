@@ -9,8 +9,11 @@ const InnerToDo: React.FC<innerToDo> = ({id, text, isDone, dueDate}) => {
   return (
 
     <div className="flex items-center">
-    <input type="checkbox" className="mr-2" />
-    <span className="text-gray-800">{text}</span>
+        {isDone ? 
+        (<input type="checkbox" className="mr-2" />):
+        (<input type="checkbox" className="mr-2" />)}
+        
+        <span className="text-gray-800">{text}</span>
     </div>
     
   )

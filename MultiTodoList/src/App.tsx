@@ -3,7 +3,11 @@ import './App.css'
 import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
 import { outerToDo } from './model';
+import Card from '@mui/material/Card';
+import { Box, Tabs, Tab, Typography } from '@mui/material';
+import TabPanel from '@mui/lab/TabPanel';
 import OuterToDo from './components/OuterToDo';
+
 
 
 
@@ -23,9 +27,7 @@ function App() {
       {
         id: Date.now(), 
         title: "Click me to edit title", 
-        innerToDoList: [
-          {id: 1, isDone: false, text:"test text 1", dueDate: "test Date 1"},
-          {id: 2, isDone: false, text:"test text 2", dueDate: "test Date 2"}]
+        innerToDoList: []
       }]);
   }
 
@@ -41,6 +43,8 @@ function App() {
   };
 
 
+
+
   return (
     <> 
 
@@ -50,7 +54,12 @@ function App() {
         <h1 className='font-sans text-3xl font-semibold text-slate-900' >Multi ToDo</h1>
         <div className='space-x-2 text-white inline-flex items-baselin justify-center'>
           <MainButton variant='addList' handleClick={handleAddOuterList}/>
-          <MainButton variant='deleteList' handleClick={handleDeleteClicked}/>
+          {(outerToDoList.length === 0) ? (
+            <MainButton variant='deleteListNoList' handleClick={handleDeleteClicked}/>
+          ) : (
+            <MainButton variant='deleteList' handleClick={handleDeleteClicked}/>
+          )}
+          
           
         </div>
 
@@ -65,8 +74,9 @@ function App() {
         </div>) : (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
           {outerToDoList.map( outerToDo =>(
-          <OuterToDo 
-          outerToDo={outerToDo}/>))}   
+
+            <OuterToDo outerToDo={outerToDo}/>
+          ))}   
   </div>
       )
       };
