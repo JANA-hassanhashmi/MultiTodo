@@ -5,9 +5,10 @@ import Modal from 'react-modal';
 interface Props {
     isPopupOpen: boolean;
     handleClosePopup: () => void;
+    handleDeleteAllLists: () => void;
 }
 
-const DialogBox: React.FC<Props> = ({isPopupOpen, handleClosePopup}) => {
+const DialogBox: React.FC<Props> = ({isPopupOpen, handleClosePopup, handleDeleteAllLists}) => {
   return (
     <div>
     <Modal
@@ -22,6 +23,7 @@ const DialogBox: React.FC<Props> = ({isPopupOpen, handleClosePopup}) => {
         <div className="mt-4 space-x-4">
           <button
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            onClick={handleDeleteAllLists}
           >
             Delete All Lists
           </button>

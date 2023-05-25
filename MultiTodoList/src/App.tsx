@@ -32,7 +32,6 @@ function App() {
   }
 
    const handleDeleteClicked = () => {
-      console.log("delete set to true");
       setIsPopupOpen(true);
    }
 
@@ -42,13 +41,18 @@ function App() {
     setIsPopupOpen(false);
   };
 
+  const handleDeleteAllLists = () => {
+    setOuterToDoList([])
+    handleClosePopup();
+  }
+
 
 
 
   return (
     <> 
 
-      <DialogBox isPopupOpen={isPopupOpen} handleClosePopup={handleClosePopup}/>
+      <DialogBox isPopupOpen={isPopupOpen} handleClosePopup={handleClosePopup} handleDeleteAllLists={handleDeleteAllLists}/>
       
       <div className='flex flex-col md:justify-between md:flex-row'>
         <h1 className='font-sans text-3xl font-semibold text-slate-900' >Multi ToDo</h1>
