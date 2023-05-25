@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import InputField from './InputField';
 import { innerToDo, outerToDo } from '../model';
 import InnerToDo from './InnerToDo';
+import { Divider } from '@mui/material';
 
 
 
@@ -45,8 +46,6 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
   
   return (
     <div>
-      
-
       <form 
           className='flex' onSubmit={ (e) => {
           handleChangeTitle(e)}} >
@@ -57,8 +56,9 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
            value={titleField}
            onChange={
             (e) =>setTitleField(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded text-2xl font-bold text-gray-900"></input>
+            className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-gray-900"></input>
      </form>
+     <Divider />
       {innerToDoList.map(innerToDo => (
       <InnerToDo 
       id={innerToDo.id} 

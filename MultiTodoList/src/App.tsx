@@ -4,7 +4,7 @@ import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
 import { outerToDo } from './model';
 import Card from '@mui/material/Card';
-import { Box, Tabs, Tab, Typography } from '@mui/material';
+import { Box, Tabs, Tab, Typography, Paper } from '@mui/material';
 import TabPanel from '@mui/lab/TabPanel';
 import OuterToDo from './components/OuterToDo';
 
@@ -72,18 +72,23 @@ function App() {
       {
         (outerToDoList.length === 0) ? (
         <div className='flex items-center justify-center h-80'>
-        <span>
-        You currently have no lists.
-        </span>
-        </div>) : (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {outerToDoList.map( outerToDo =>(
-
-            <OuterToDo outerToDo={outerToDo}/>
-          ))}   
-  </div>
-      )
-      };
+          <span>
+          You currently have no lists.
+          </span>
+          </div>) : (
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            {outerToDoList.map( outerToDo =>(
+              <Box>
+                <Paper variant="outlined" elevation={3} square>
+                  <OuterToDo outerToDo={outerToDo}/>
+                </Paper>
+                
+              </Box>
+              
+            ))}   
+        </div>
+        )
+      }
       
     </>
   )
