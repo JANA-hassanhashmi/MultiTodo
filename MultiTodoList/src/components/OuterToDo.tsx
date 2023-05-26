@@ -55,11 +55,14 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
   }
 
   const updateProgress = () => {
-    setProgressValue (
-      outerToDo.innerToDoList.filter(
-        (innerToDo) => (innerToDo.isDone)
-      ).length / outerToDo.innerToDoList.length
-    )
+    
+    const currentLength = outerToDoList.find(current => current.id === outerToDo.id)?.innerToDoList.length!
+
+
+
+    const currentDone = outerToDoList.find(current => current.id === outerToDo.id)?.innerToDoList.filter(
+      (innerToDo) => (innerToDo.isDone)).length!
+    setProgressValue ( (currentDone / currentLength) * 100)
   }
 
   
