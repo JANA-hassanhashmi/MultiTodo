@@ -13,7 +13,7 @@ const OuterToDoDisplay: React.FC<Props> = ({outerToDo}) => {
     <Box>
         <Paper variant="outlined" elevation={3} square>
             <OuterToDo outerToDo={outerToDo}/>
-            <span>{outerToDo.innerToDoList[0].isDone}</span>
+           
         </Paper>
     </Box>
   )

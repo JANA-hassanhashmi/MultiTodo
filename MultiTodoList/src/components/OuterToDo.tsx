@@ -28,7 +28,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
   const handleAddInnerItem = (e: React.FormEvent) => {
    e.preventDefault();
    setInnerToDoList((oldValue) => [...oldValue, createInnerToDo(inputField)]);
-   Object.assign(outerToDo.innerToDoList, innerToDoList);
+   //Object.assign(outerToDo.innerToDoList, innerToDoList);
    setinputField("");
   }
 
@@ -48,13 +48,13 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
   }
 
   const updateProgess = () => {
-    return (
+    setProgressValue (
       outerToDo.innerToDoList.filter(
         (innerToDo) => (innerToDo.isDone)
       ).length / outerToDo.innerToDoList.length
     )
-    
   }
+
   
   return (
 
@@ -71,7 +71,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
           value={titleField}
           onChange={
           (e) =>setTitleField(e.target.value)}
-          className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-gray-900"></input>
+          className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-blue-600"></input>
      </form>
      <LinearProgress 
      variant='determinate'
@@ -79,10 +79,8 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
      <Divider />
       {innerToDoList.map(innerToDo => (
       <InnerToDo 
-      id={innerToDo.id} 
-      text={innerToDo.text} 
-      isDone={innerToDo.isDone}
-      dueDate={innerToDo.dueDate} />))}
+      innerToDo={innerToDo} 
+      updateProgess={updateProgess}/>))}
       <InputField 
       inputField={inputField}
       setinputField={setinputField}
