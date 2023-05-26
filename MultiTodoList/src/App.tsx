@@ -3,11 +3,7 @@ import './App.css'
 import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
 import { outerToDo } from './model';
-import Card from '@mui/material/Card';
-import { Box, Tabs, Tab, Typography, Paper } from '@mui/material';
-import TabPanel from '@mui/lab/TabPanel';
 import OuterToDo from './components/OuterToDo';
-import OuterToDoDisplay from './components/OuterToDoDisplay';
 
 
 

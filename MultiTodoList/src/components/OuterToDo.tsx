@@ -54,7 +54,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
     }
   }
 
-  const updateProgess = () => {
+  const updateProgress = () => {
     setProgressValue (
       outerToDo.innerToDoList.filter(
         (innerToDo) => (innerToDo.isDone)
@@ -85,9 +85,13 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
      value={progressValue}/>
      <Divider />
       {outerToDo.innerToDoList.map(innerToDo => (
-      <InnerToDo 
+      <InnerToDo
+      outerId={outerToDo.id} 
       innerToDo={innerToDo} 
-      updateProgess={updateProgess}/>))}
+      updateProgress={updateProgress}
+      outerToDoList={outerToDoList}
+      setOuterToDoList={setOuterToDoList}
+      />))}
       <InputField 
       inputField={inputField}
       setinputField={setinputField}
