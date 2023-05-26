@@ -66,12 +66,16 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
     setProgressValue ( (currentDone / currentLength) * 100)
   }
 
+
+  const deleteOuter = (outerId: number) => {
+    setOuterToDoList(outerToDoList.filter(current => current.id !== outerId))
+  }
   
   return (
 
     <Box>
     <Paper variant="outlined" elevation={24} square>
-      <Card className='flex' variant='outlined'>
+      <Card className='flex bg' variant='outlined'>
         <form 
           className='flex' onSubmit={ (e) => {
           handleChangeTitle(e)}} >
@@ -85,7 +89,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
             className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-blue-600"></input>
         </form>
 
-        <IconButton color='error' disableFocusRipple={true} >
+        <IconButton color='error' disableFocusRipple={true} onClick={()=> deleteOuter(outerToDo.id)}>
         <CloseRounded/>
         </IconButton>
       </Card>
