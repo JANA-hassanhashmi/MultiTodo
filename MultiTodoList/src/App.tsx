@@ -50,7 +50,7 @@ function App() {
 
       <DialogBox isPopupOpen={isPopupOpen} handleClosePopup={handleClosePopup} handleDeleteAllLists={handleDeleteAllLists}/>
       
-      <div className='flex flex-col md:justify-between md:flex-row'>
+      <div className='flex flex-col md:justify-between md:flex-row mb-3'>
         <h1 className='font-sans text-3xl font-semibold text-slate-900' >Multi ToDo</h1>
         <div className='space-x-2 text-white inline-flex items-baselin justify-center'>
           <MainButton variant='addList' handleClick={handleAddOuterList}/>

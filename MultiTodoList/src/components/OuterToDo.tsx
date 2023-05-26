@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react'
 import InputField from './InputField';
 import { innerToDo, outerToDo } from '../model';
 import InnerToDo from './InnerToDo';
-import { Box, Divider, LinearProgress, Paper } from '@mui/material';
+import { Box, Button, Card, Divider, IconButton, LinearProgress, Paper } from '@mui/material';
+import { CloseRounded } from '@mui/icons-material';
 
 
 
@@ -69,20 +70,27 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
   return (
 
     <Box>
-    <Paper variant="outlined" elevation={3} square>
+    <Paper variant="outlined" elevation={24} square>
+      <Card className='flex' variant='outlined'>
+        <form 
+          className='flex' onSubmit={ (e) => {
+          handleChangeTitle(e)}} >
+          <input
+          ref={titleRef}
+            type='input'
+            placeholder={outerToDo.title}
+            value={titleField}
+            onChange={
+            (e) =>setTitleField(e.target.value)}
+            className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-blue-600"></input>
+        </form>
+
+        <IconButton color='error' disableFocusRipple={true} >
+        <CloseRounded/>
+        </IconButton>
+      </Card>
       
-      <form 
-        className='flex' onSubmit={ (e) => {
-        handleChangeTitle(e)}} >
-        <input
-        ref={titleRef}
-          type='input'
-          placeholder={outerToDo.title}
-          value={titleField}
-          onChange={
-          (e) =>setTitleField(e.target.value)}
-          className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-blue-600"></input>
-     </form>
+     
      <LinearProgress 
      variant='determinate'
      value={progressValue}/>
