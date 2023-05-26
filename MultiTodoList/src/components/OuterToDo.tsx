@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import InputField from './InputField';
 import { innerToDo, outerToDo } from '../model';
 import InnerToDo from './InnerToDo';
-import { Divider } from '@mui/material';
+import { Box, Divider, LinearProgress, Paper } from '@mui/material';
 
 
 
@@ -22,10 +22,13 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
   const [titleField, setTitleField] = useState<string>("");
   const titleRef = useRef<HTMLInputElement>(null)
 
+
+  const [progressValue, setProgressValue] = useState<number>(0)
+
   const handleAddInnerItem = (e: React.FormEvent) => {
    e.preventDefault();
    setInnerToDoList((oldValue) => [...oldValue, createInnerToDo(inputField)]);
-   Object.assign(innerToDoList, outerToDo.innerToDoList);
+   Object.assign(outerToDo.innerToDoList, innerToDoList);
    setinputField("");
   }
 
@@ -43,21 +46,36 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
       dueDate: ""
     }
   }
+
+  const updateProgess = () => {
+    return (
+      outerToDo.innerToDoList.filter(
+        (innerToDo) => (innerToDo.isDone)
+      ).length / outerToDo.innerToDoList.length
+    )
+    
+  }
   
   return (
-    <div>
+
+    <Box>
+    <Paper variant="outlined" elevation={3} square>
+      
       <form 
-          className='flex' onSubmit={ (e) => {
-          handleChangeTitle(e)}} >
-          <input
-          ref={titleRef}
-           type='input'
-           placeholder={outerToDo.title}
-           value={titleField}
-           onChange={
-            (e) =>setTitleField(e.target.value)}
-            className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-gray-900"></input>
+        className='flex' onSubmit={ (e) => {
+        handleChangeTitle(e)}} >
+        <input
+        ref={titleRef}
+          type='input'
+          placeholder={outerToDo.title}
+          value={titleField}
+          onChange={
+          (e) =>setTitleField(e.target.value)}
+          className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-gray-900"></input>
      </form>
+     <LinearProgress 
+     variant='determinate'
+     value={progressValue}/>
      <Divider />
       {innerToDoList.map(innerToDo => (
       <InnerToDo 
@@ -70,7 +88,10 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
       setinputField={setinputField}
       handleAddInnerItem={handleAddInnerItem}
       />
-    </div>
+    </Paper>
+    </Box>
+
+
   )
 }
 

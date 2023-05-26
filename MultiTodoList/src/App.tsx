@@ -7,6 +7,7 @@ import Card from '@mui/material/Card';
 import { Box, Tabs, Tab, Typography, Paper } from '@mui/material';
 import TabPanel from '@mui/lab/TabPanel';
 import OuterToDo from './components/OuterToDo';
+import OuterToDoDisplay from './components/OuterToDoDisplay';
 
 
 
@@ -78,13 +79,7 @@ function App() {
           </div>) : (
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
             {outerToDoList.map( outerToDo =>(
-              <Box>
-                <Paper variant="outlined" elevation={3} square>
-                  <OuterToDo outerToDo={outerToDo}/>
-                </Paper>
-                
-              </Box>
-              
+              <OuterToDoDisplay outerToDo={outerToDo}/>
             ))}   
         </div>
         )

@@ -1,19 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { innerToDo } from '../model'
+import { Checkbox } from '@mui/material'
 
 
 
 
 
 const InnerToDo: React.FC<innerToDo> = ({id, text, isDone, dueDate}) => {
-  return (
+    
+    
+    const [doneStatus, setdoneStatus] = useState(isDone)
+
+
+    return (
 
     <div className="flex items-center">
-        {isDone ? 
-        (<input type="checkbox" className="mr-2" />):
-        (<input type="checkbox" className="mr-2" />)}
+        <Checkbox 
+        onChange={
+            () => {
+                setdoneStatus(!doneStatus)
+                Object.assign(isDone, doneStatus)
+            }
+        }/>
         
-        <span className="text-gray-800">{text}</span>
+        {doneStatus ? (
+            <s className="text-gray-800">{text}</s>
+        ) : (<span className="text-gray-800">{text}</span>)}
+        
     </div>
     
   )

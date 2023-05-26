@@ -25,21 +25,6 @@ const InputField:React.FC<Props> = ({inputField, setinputField, handleAddInnerIt
             (e) =>setinputField(e.target.value)
         }/>
          </form>
-        // <form 
-    // className='flex'
-    // onSubmit={ (e) => {
-    // handleAddInnerItem(e) 
-    // inputRef.current?.blur();}} >
-    //     <input
-    //     ref={inputRef}
-    //     type='input'
-    //     placeholder='Add item...'
-    //     value={inputField}
-    //     onChange={
-    //         (e) =>setinputField(e.target.value)
-    //     }></input>
-        
-    // </form>
   )
 }
 
