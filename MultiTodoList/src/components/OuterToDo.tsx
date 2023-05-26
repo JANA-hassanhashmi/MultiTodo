@@ -6,18 +6,18 @@ import { Box, Divider, LinearProgress, Paper } from '@mui/material';
 
 
 
-
 interface Props {
   outerToDo: outerToDo
+  outerToDoList: outerToDo[]
+  setOuterToDoList: React.Dispatch<React.SetStateAction<outerToDo[]>>
 }
 
 
 
 
 
-const OuterToDo: React.FC<Props> = ({outerToDo}) => {
+const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}) => {
   
-  const [innerToDoList, setInnerToDoList] = useState<innerToDo[]>(outerToDo.innerToDoList);
   const [inputField, setinputField] = useState<string>("");
   const [titleField, setTitleField] = useState<string>("");
   const titleRef = useRef<HTMLInputElement>(null)
@@ -27,8 +27,15 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
 
   const handleAddInnerItem = (e: React.FormEvent) => {
    e.preventDefault();
-   setInnerToDoList((oldValue) => [...oldValue, createInnerToDo(inputField)]);
-   //Object.assign(outerToDo.innerToDoList, innerToDoList);
+   const updatedOuterToDoList = outerToDoList.map(currentOuter => {
+    if(currentOuter.id === outerToDo.id){
+      currentOuter.innerToDoList.push(createInnerToDo(inputField))
+    }
+    return {...currentOuter}
+   })
+    
+
+   setOuterToDoList(updatedOuterToDoList)
    setinputField("");
   }
 
@@ -77,7 +84,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo}) => {
      variant='determinate'
      value={progressValue}/>
      <Divider />
-      {innerToDoList.map(innerToDo => (
+      {outerToDo.innerToDoList.map(innerToDo => (
       <InnerToDo 
       innerToDo={innerToDo} 
       updateProgess={updateProgess}/>))}

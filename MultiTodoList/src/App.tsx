@@ -16,7 +16,6 @@ import OuterToDoDisplay from './components/OuterToDoDisplay';
 
 
 function App() {
-  const [count, setCount] = useState(0);
 
   const [outerToDoList, setOuterToDoList] = useState<outerToDo[]>([]);
 
@@ -79,7 +78,7 @@ function App() {
           </div>) : (
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
             {outerToDoList.map( outerToDo =>(
-              <OuterToDoDisplay outerToDo={outerToDo}/>
+              <OuterToDo outerToDo={outerToDo} outerToDoList={outerToDoList} setOuterToDoList={setOuterToDoList}/>
             ))}   
         </div>
         )

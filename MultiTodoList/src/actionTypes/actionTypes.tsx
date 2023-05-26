@@ -1,0 +1,4 @@
+export const ADD_INNER_ITEM = "ADD_INNER_ITEM";
+export const DELETE_INNER_ITEM = "DELETE_INNER_ITEM";
+export const ADD_OUTER_LIST = "ADD_OUTER_LIST";
+export const DELETE_OUTER_LIST = "DELETE_OUTER_LIST";
