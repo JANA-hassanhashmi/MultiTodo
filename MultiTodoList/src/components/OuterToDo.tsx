@@ -4,6 +4,7 @@ import { innerToDo, outerToDo } from '../model';
 import InnerToDo from './InnerToDo';
 import { Box, Button, Card, Divider, IconButton, LinearProgress, Paper, Tab, Tabs } from '@mui/material';
 import { CloseRounded } from '@mui/icons-material';
+import { TabPanel } from '@mui/lab';
 
 
 
@@ -25,7 +26,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
   const [progressValue, setProgressValue] = useState<number>(0)
 
 
-  const [tabValue, setTabValue] = useState(2)
+  const [tabValue, setTabValue] = React.useState(2)
 
   const changeTab = (e: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue)
@@ -76,6 +77,11 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
     setOuterToDoList(outerToDoList.filter(current => current.id !== outerId))
   }
   
+
+
+
+
+
   return (
 
     <Box>
@@ -112,19 +118,64 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
         <Tab label="All" />
       </Tabs>
     </Box>
-      {outerToDo.innerToDoList.map(innerToDo => (
-      <InnerToDo
-      outerId={outerToDo.id} 
-      innerToDo={innerToDo} 
-      updateProgress={updateProgress}
-      outerToDoList={outerToDoList}
-      setOuterToDoList={setOuterToDoList}
-      />))}
-      <InputField 
-      inputField={inputField}
-      setinputField={setinputField}
-      handleAddInnerItem={handleAddInnerItem}
-      />
+
+ 
+
+    { 
+      (tabValue === 0) ? (
+        <div>
+          {outerToDo.innerToDoList.filter(innerToDo => !innerToDo.isDone).map(innerToDo => (
+          <InnerToDo
+          outerId={outerToDo.id} 
+          innerToDo={innerToDo} 
+          updateProgress={updateProgress}
+          outerToDoList={outerToDoList}
+          setOuterToDoList={setOuterToDoList}
+          />))}
+          <InputField 
+          inputField={inputField}
+          setinputField={setinputField}
+          handleAddInnerItem={handleAddInnerItem}
+          />
+        </div>
+      ) : 
+      (
+        (tabValue === 1) ? (
+        <div>
+          {outerToDo.innerToDoList.filter(innerToDo => innerToDo.isDone).map(innerToDo => (
+          <InnerToDo
+          outerId={outerToDo.id} 
+          innerToDo={innerToDo} 
+          updateProgress={updateProgress}
+          outerToDoList={outerToDoList}
+          setOuterToDoList={setOuterToDoList}
+          />))}
+          <InputField 
+          inputField={inputField}
+          setinputField={setinputField}
+          handleAddInnerItem={handleAddInnerItem}
+          />
+        </div>
+        ):(
+        <div>
+          {outerToDo.innerToDoList.map(innerToDo => (
+          <InnerToDo
+          outerId={outerToDo.id} 
+          innerToDo={innerToDo} 
+          updateProgress={updateProgress}
+          outerToDoList={outerToDoList}
+          setOuterToDoList={setOuterToDoList}
+          />))}
+          <InputField 
+          inputField={inputField}
+          setinputField={setinputField}
+          handleAddInnerItem={handleAddInnerItem}
+          />
+        </div>
+        ))
+      
+    }
+      
     </Paper>
     </Box>
 
