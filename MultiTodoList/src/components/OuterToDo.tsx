@@ -128,8 +128,8 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
      value={progressValue}/>
      <Divider />
 
-    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-      <Tabs value={tabValue}  aria-label="basic tabs example" className='flex justify-center' onChange={changeTab}>
+    <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: "center"}}>
+      <Tabs value={tabValue}  aria-label="basic tabs example" onChange={changeTab}>
         <Tab label="Active" />
         <Tab label="Completed"  />
         <Tab label="All" />
