@@ -45,7 +45,7 @@ const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerTo
 
     <div className="flex items-center">
         <Checkbox 
-        onChange={handleDone}/>
+        onChange={handleDone} checked={innerToDo.isDone}/>
         
         {outerToDoList.find(current => current.id === outerId)?.innerToDoList.find(current => current.id === innerToDo.id)?.isDone ? (
             <s className="text-gray-800">{innerToDo.text}</s>
