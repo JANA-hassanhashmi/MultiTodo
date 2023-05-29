@@ -159,7 +159,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
 
       
       (tabValue === 0) ? (
-        <div>
+        <div className='h-auto flex justify-center items-left flex-col'>
           {outerToDo.innerToDoList.filter(innerToDo => !innerToDo.isDone).map(innerToDo => (
           <InnerToDo
           outerId={outerToDo.id} 
@@ -168,16 +168,19 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
           outerToDoList={outerToDoList}
           setOuterToDoList={setOuterToDoList}
           />))}
-          <InputField 
-          inputField={inputField}
-          setinputField={setinputField}
-          handleAddInnerItem={handleAddInnerItem}
-          />
+
+          <div className='flex justify-center'>
+            <InputField 
+            inputField={inputField}
+            setinputField={setinputField}
+            handleAddInnerItem={handleAddInnerItem}
+            />
+          </div>
         </div>
       ) : 
       (
         (tabValue === 1) ? (
-        <div>
+        <div className='h-auto flex justify-center items-left flex-col'>
           {outerToDo.innerToDoList.filter(innerToDo => innerToDo.isDone).map(innerToDo => (
           <InnerToDo
           outerId={outerToDo.id} 
@@ -186,14 +189,16 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
           outerToDoList={outerToDoList}
           setOuterToDoList={setOuterToDoList}
           />))}
-          <InputField 
-          inputField={inputField}
-          setinputField={setinputField}
-          handleAddInnerItem={handleAddInnerItem}
-          />
+          <div className='flex justify-center'>
+            <InputField 
+            inputField={inputField}
+            setinputField={setinputField}
+            handleAddInnerItem={handleAddInnerItem}
+            />
+          </div>
         </div>
         ):(
-        <div>
+        <div className='h-auto8 flex justify-center items-left flex-col'>
           {outerToDo.innerToDoList.map(innerToDo => (
           <InnerToDo
           outerId={outerToDo.id} 
@@ -202,11 +207,13 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
           outerToDoList={outerToDoList}
           setOuterToDoList={setOuterToDoList}
           />))}
-          <InputField 
-          inputField={inputField}
-          setinputField={setinputField}
-          handleAddInnerItem={handleAddInnerItem}
-          />
+          <div className='flex justify-center'>
+            <InputField 
+            inputField={inputField}
+            setinputField={setinputField}
+            handleAddInnerItem={handleAddInnerItem}
+            />
+          </div>
         </div>
         ))
       ) 
