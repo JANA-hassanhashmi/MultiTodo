@@ -46,6 +46,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
 
    setOuterToDoList(updatedOuterToDoList)
    setinputField("");
+   updateProgress()
   }
 
   const handleChangeTitle = (e: React.FormEvent) => {
@@ -72,6 +73,10 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
     const currentDone = outerToDoList.find(current => current.id === outerToDo.id)?.innerToDoList.filter(
       (innerToDo) => (innerToDo.isDone)).length!
     setProgressValue ( (currentDone / currentLength) * 100)
+
+    if(currentLength === 0){
+      setProgressValue(0)
+    }
   }
 
 

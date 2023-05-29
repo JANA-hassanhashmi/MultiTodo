@@ -17,14 +17,16 @@ function App() {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  
+
   const handleAddOuterList = () => {
   
-    setOuterToDoList(oldValue => [...oldValue, 
+    setOuterToDoList(oldValue => [ 
       {
         id: Date.now(), 
         title: "Click me to edit title", 
         innerToDoList: []
-      }]);
+      }, ...oldValue]);
   }
 
    const handleDeleteClicked = () => {
@@ -48,6 +50,7 @@ function App() {
   return (
     <> 
 
+
       <DialogBox isPopupOpen={isPopupOpen} handleClosePopup={handleClosePopup} handleDeleteAllLists={handleDeleteAllLists}/>
       
       <div className='flex flex-col md:justify-between md:flex-row mb-3'>
@@ -68,6 +71,7 @@ function App() {
       {
         (outerToDoList.length === 0) ? (
         <div className='flex items-center justify-center h-80 '>
+          
           <span>
           You currently have no lists.
           </span>
