@@ -35,6 +35,7 @@ const InputField:React.FC<Props> = ({inputField, setinputField, handleAddInnerIt
         ),
       }}
       variant='standard'
+      sx={{width: "370px", border: "solid", borderRadius: '5px', borderColor: "#DCDCDC"}}
       />
     </Box>
 
