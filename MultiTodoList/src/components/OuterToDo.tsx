@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import InputField from './InputField';
 import { innerToDo, outerToDo } from '../model';
 import InnerToDo from './InnerToDo';
-import { Box, Button, Card, Divider, IconButton, LinearProgress, Paper } from '@mui/material';
+import { Box, Button, Card, Divider, IconButton, LinearProgress, Paper, Tab, Tabs } from '@mui/material';
 import { CloseRounded } from '@mui/icons-material';
 
 
@@ -22,9 +22,14 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
   const [inputField, setinputField] = useState<string>("");
   const [titleField, setTitleField] = useState<string>("");
   const titleRef = useRef<HTMLInputElement>(null)
-
-
   const [progressValue, setProgressValue] = useState<number>(0)
+
+
+  const [tabValue, setTabValue] = useState(2)
+
+  const changeTab = (e: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue)
+  }
 
   const handleAddInnerItem = (e: React.FormEvent) => {
    e.preventDefault();
@@ -99,6 +104,14 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
      variant='determinate'
      value={progressValue}/>
      <Divider />
+
+    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Tabs value={tabValue}  aria-label="basic tabs example" className='flex justify-center' onChange={changeTab}>
+        <Tab label="Active" />
+        <Tab label="Completed"  />
+        <Tab label="All" />
+      </Tabs>
+    </Box>
       {outerToDo.innerToDoList.map(innerToDo => (
       <InnerToDo
       outerId={outerToDo.id} 
