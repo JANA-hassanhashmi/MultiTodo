@@ -5,6 +5,8 @@ import InnerToDo from './InnerToDo';
 import { Box, Button, Card, Divider, IconButton, LinearProgress, Paper, Tab, Tabs } from '@mui/material';
 import { CloseRounded } from '@mui/icons-material';
 import { TabPanel } from '@mui/lab';
+import { sizing } from '@mui/system';
+
 
 
 
@@ -85,10 +87,10 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
   return (
 
     <Box>
-    <Paper variant="outlined" elevation={24} square>
-      <Card className='flex bg' variant='outlined'>
+    <Paper variant="outlined" elevation={24} sx={{}} square>
+      <Card className='flex'  sx={{backgroundColor: '#F0F0F0', height: "45px", position: "relative"}}>
         <form 
-          className='flex' onSubmit={ (e) => {
+          className='flex bg-inherit items-center' onSubmit={ (e) => {
           handleChangeTitle(e)}} >
           <input
           ref={titleRef}
@@ -97,10 +99,24 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
             value={titleField}
             onChange={
             (e) =>setTitleField(e.target.value)}
-            className="px-4 py-2 border-gray-300 rounded text-2xl font-bold text-blue-600"></input>
+            className="px-4 py-2 
+            border-gray-300 
+            rounded text-2xl 
+            text-black bg-inherit 
+            focus:bg-amber-200 
+            cursor-pointer 
+            w-80 
+            h-5
+            placeholder-current
+            outline-none"></input>
         </form>
 
-        <IconButton color='error' disableFocusRipple={true} onClick={()=> deleteOuter(outerToDo.id)}>
+        <IconButton 
+        color='error' 
+        disableFocusRipple={true} 
+        onClick={()=> deleteOuter(outerToDo.id)}
+        sx={{position: "absolute", right: "0" }}
+        >
         <CloseRounded/>
         </IconButton>
       </Card>
@@ -122,6 +138,22 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
  
 
     { 
+
+      (outerToDo.innerToDoList.length === 0) ? (
+        <div className=''>
+          <div className='h-28 flex justify-center items-center'>
+            <span className='text-slate-400'>There are no items in your list.</span>
+          </div>
+          
+          <InputField 
+          inputField={inputField}
+          setinputField={setinputField}
+          handleAddInnerItem={handleAddInnerItem}
+          />
+        </div>
+      ) : (
+
+      
       (tabValue === 0) ? (
         <div>
           {outerToDo.innerToDoList.filter(innerToDo => !innerToDo.isDone).map(innerToDo => (
@@ -173,7 +205,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
           />
         </div>
         ))
-      
+      ) 
     }
       
     </Paper>

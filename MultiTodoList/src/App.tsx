@@ -67,12 +67,12 @@ function App() {
 
       {
         (outerToDoList.length === 0) ? (
-        <div className='flex items-center justify-center h-80'>
+        <div className='flex items-center justify-center h-80 '>
           <span>
           You currently have no lists.
           </span>
           </div>) : (
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '>
             {outerToDoList.map( outerToDo =>(
               <OuterToDo outerToDo={outerToDo} outerToDoList={outerToDoList} setOuterToDoList={setOuterToDoList}/>
             ))}   
