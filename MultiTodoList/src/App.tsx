@@ -17,7 +17,12 @@ function App() {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  const [date, setDate] = useState();
+
+  const [innerID, setinnerID] = useState(0);
+  const [outerId, setouterId] = useState(0);
 
   const handleAddOuterList = () => {
   
@@ -44,15 +49,61 @@ function App() {
     handleClosePopup();
   }
 
+  const handleCloseCalendar = () => {
+    setIsCalendarOpen(false);
+  };
 
+  const handleSetDueDateClicked = (inID: number, outID: number) => {
+    setinnerID(inID)
+    setouterId(outID)
+    setIsCalendarOpen(true)
+  }
+
+  const handleDateSet = (date) => {
+    
+    let dateString = muiDateToString(date)
+    console.log(dateString)
+    const newInner = outerToDoList.find(current => current.id === outerId)?.innerToDoList.map(currentInner => {
+      if(currentInner.id === innerID){
+        currentInner = {
+          id: currentInner.id,
+          text: currentInner.text,
+          isDone: currentInner.isDone,
+          dueDate: dateString
+        }
+      }
+      return {...currentInner}
+    })!
+
+    const updatedOuterList = outerToDoList.map(currentOuter => {
+        if(currentOuter.id === outerId){
+            currentOuter.innerToDoList = newInner
+        }
+
+        return {...currentOuter}
+    })
+
+    setOuterToDoList(updatedOuterList)
+    setIsCalendarOpen(false)
+  }
+
+  const muiDateToString = (date) => {
+    const { $y, $M, $D } = date
+    console.log($y); 
+    console.log($M); 
+    console.log($D)
+    return ($D.toString() +"/" + $M.toString() + "/" + $y.toString())
+  }
 
 
   return (
     <> 
 
 
-      <DialogBox isPopupOpen={isPopupOpen} handleClosePopup={handleClosePopup} handleDeleteAllLists={handleDeleteAllLists}/>
+      <DialogBox variant='delete' isPopupOpen={isPopupOpen} handleClosePopup={handleClosePopup} handleAction={handleDeleteAllLists}/>
       
+      <DialogBox variant='calendar'isPopupOpen={isCalendarOpen} handleClosePopup={handleCloseCalendar} handleAction={handleDateSet}/>
+
       <div className='flex flex-col md:justify-between md:flex-row mb-3'>
         <h1 className='font-sans text-3xl font-semibold text-slate-900' >Multi ToDo</h1>
         <div className='space-x-2 text-white inline-flex items-baselin justify-center'>
@@ -78,7 +129,11 @@ function App() {
           </div>) : (
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '>
             {outerToDoList.map( outerToDo =>(
-              <OuterToDo outerToDo={outerToDo} outerToDoList={outerToDoList} setOuterToDoList={setOuterToDoList}/>
+              <OuterToDo 
+              outerToDo={outerToDo} 
+              outerToDoList={outerToDoList} 
+              setOuterToDoList={setOuterToDoList}
+              handleSetDueDateClicked={handleSetDueDateClicked}/>
             ))}   
         </div>
         )

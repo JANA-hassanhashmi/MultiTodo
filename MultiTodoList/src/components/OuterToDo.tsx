@@ -14,13 +14,14 @@ interface Props {
   outerToDo: outerToDo
   outerToDoList: outerToDo[]
   setOuterToDoList: React.Dispatch<React.SetStateAction<outerToDo[]>>
+  handleSetDueDateClicked: (inID: number, outID: number)=>void
 }
 
 
 
 
 
-const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}) => {
+const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList, handleSetDueDateClicked}) => {
   
   const [inputField, setinputField] = useState<string>("");
   const [titleField, setTitleField] = useState<string>("");
@@ -118,10 +119,17 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
         </form>
 
         <IconButton 
-        color='error' 
         disableFocusRipple={true} 
         onClick={()=> deleteOuter(outerToDo.id)}
-        sx={{position: "absolute", right: "0" }}
+        sx={
+          {
+            position: "absolute", 
+            right: "0", 
+            ":hover":{
+              color:"red"
+            },
+
+          }}
         >
         <CloseRounded/>
         </IconButton>
@@ -172,6 +180,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
           updateProgress={updateProgress}
           outerToDoList={outerToDoList}
           setOuterToDoList={setOuterToDoList}
+          handleSetDueDateClicked={handleSetDueDateClicked}
           />))}
 
           <div className='flex justify-center'>
@@ -181,6 +190,8 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
             handleAddInnerItem={handleAddInnerItem}
             />
           </div>
+
+          
         </div>
       ) : 
       (
@@ -193,6 +204,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
           updateProgress={updateProgress}
           outerToDoList={outerToDoList}
           setOuterToDoList={setOuterToDoList}
+          handleSetDueDateClicked={handleSetDueDateClicked}
           />))}
           <div className='flex justify-center'>
             <InputField 
@@ -211,6 +223,7 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList}
           updateProgress={updateProgress}
           outerToDoList={outerToDoList}
           setOuterToDoList={setOuterToDoList}
+          handleSetDueDateClicked={handleSetDueDateClicked}
           />))}
           <div className='flex justify-center'>
             <InputField 

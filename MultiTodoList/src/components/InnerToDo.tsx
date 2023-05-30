@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
 import { innerToDo, outerToDo } from '../model'
-import { Checkbox, ListItemIcon, Menu, MenuItem } from '@mui/material'
+import { Checkbox, Divider, ListItemIcon, Menu, MenuItem } from '@mui/material'
 import { current } from '@reduxjs/toolkit'
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { DatePicker } from '@mui/x-date-pickers';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 
 interface Props {
@@ -17,13 +13,14 @@ interface Props {
     updateProgress: () => void
     outerToDoList: outerToDo[]
     setOuterToDoList: React.Dispatch<React.SetStateAction<outerToDo[]>>
+    handleSetDueDateClicked: (inID: number, outID: number)=>void
 }
 
 
 
 
 
-const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerToDoList, setOuterToDoList}) => {
+const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerToDoList, setOuterToDoList, handleSetDueDateClicked}) => {
     
     
     const handleDone = () => {
@@ -51,7 +48,7 @@ const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerTo
     const open = Boolean(anchorEl);
 
 
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+    
 
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -62,10 +59,6 @@ const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerTo
         setAnchorEl(null);
     };
 
-    const handleSetDueDate = () => {
-        setAnchorEl(null);
-        setIsCalendarOpen(true);
-    }
 
 
     const handleDelete = () => {
@@ -86,18 +79,11 @@ const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerTo
     };
 
 
-    const [selectedDate, setSelectedDate] = useState(Date());
-
-    const handleDateChange = (date: TDate) => {
-        setIsCalendarOpen(false)
-        setSelectedDate(date);
-        console.log('Selected date:', date);
-      // Perform any additional logic or state updates based on the selected date
-    };
     
     return (
 
-    <div className="flex items-center relative">
+    <div className="outline outline-1 outline-gray-200">
+        <div className="flex items-center relative ">
         <Checkbox 
         onChange={handleDone} checked={innerToDo.isDone}/>
         
@@ -107,19 +93,11 @@ const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerTo
         <span className="text-gray-800">{innerToDo.text}</span>
         )}
 
-
-        
-        {isCalendarOpen ? (        
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateCalendar 
-            value={selectedDate}
-            onChange={(value) => handleDateChange(value)}
-            />
-        </LocalizationProvider>):(
         <div className='flex absolute right-1 cursor-pointer ' onClick={handleClick}>
             <MoreVertOutlinedIcon sx={{color: "#A8A8A8", "&:hover":{color: "#000000"}}}/>
         </div>
-        )}
+        
+
         <Menu
         id='basic-menu'
         anchorEl={anchorEl}
@@ -134,7 +112,10 @@ const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerTo
                 
             </MenuItem>
 
-            <MenuItem onClick={handleSetDueDate}>
+            <MenuItem onClick={()=> {
+                setAnchorEl(null)
+                handleSetDueDateClicked(innerToDo.id, outerId)
+            }}>
                 <ListItemIcon>
                     <CalendarMonthIcon />
                 </ListItemIcon>
@@ -142,6 +123,25 @@ const InnerToDo: React.FC<Props> = ({outerId, innerToDo, updateProgress, outerTo
             </MenuItem>
         </Menu>
 
+        </div>
+
+        {
+        
+        (outerToDoList.find(current => current.id === outerId)?.innerToDoList.find(current => current.id === innerToDo.id)?.dueDate !== "") ? (
+            <div className=''>
+                <Divider variant="middle" />
+                <div className='inline-flex justify-items-start '>
+
+                    <span className='text-black font-bold text-sm'> Due on: </span>
+                    <span className='text-gray-400'>{outerToDoList.find(current => current.id === outerId)?.innerToDoList.find(current => current.id === innerToDo.id)?.dueDate}</span>
+                </div>
+                
+            </div>
+            
+        ):(
+            <span></span>
+        ) } 
+        
     </div>
     
   )
