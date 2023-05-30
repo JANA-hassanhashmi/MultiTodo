@@ -6,6 +6,7 @@ import { Box, Button, Card, Divider, IconButton, LinearProgress, Paper, Tab, Tab
 import { CloseRounded } from '@mui/icons-material';
 import { TabPanel } from '@mui/lab';
 import { sizing } from '@mui/system';
+import { current } from '@reduxjs/toolkit';
 
 
 
@@ -196,24 +197,45 @@ const OuterToDo: React.FC<Props> = ({outerToDo, outerToDoList, setOuterToDoList,
       ) : 
       (
         (tabValue === 1) ? (
-        <div className='h-auto flex justify-center items-left flex-col'>
-          {outerToDo.innerToDoList.filter(innerToDo => innerToDo.isDone).map(innerToDo => (
-          <InnerToDo
-          outerId={outerToDo.id} 
-          innerToDo={innerToDo} 
-          updateProgress={updateProgress}
-          outerToDoList={outerToDoList}
-          setOuterToDoList={setOuterToDoList}
-          handleSetDueDateClicked={handleSetDueDateClicked}
-          />))}
-          <div className='flex justify-center'>
-            <InputField 
-            inputField={inputField}
-            setinputField={setinputField}
-            handleAddInnerItem={handleAddInnerItem}
-            />
+        
+          (outerToDoList.find(current => current.id === outerToDo.id)!.innerToDoList.filter(current => !current.isDone).length !== 0) ? (
+            <div>
+            <div className='h-28 flex justify-center items-center'>
+              <span className='text-slate-400'>There are no items in your completed list.</span>
+            </div>
+            
+            <div className='flex justify-center'>
+              <InputField 
+              inputField={inputField}
+              setinputField={setinputField}
+              handleAddInnerItem={handleAddInnerItem}
+              />
+            </div>
+            
           </div>
-        </div>
+          ) :(
+            <div className='h-auto flex justify-center items-left flex-col'>
+            {outerToDo.innerToDoList.filter(innerToDo => innerToDo.isDone).map(innerToDo => (
+            <InnerToDo
+            outerId={outerToDo.id} 
+            innerToDo={innerToDo} 
+            updateProgress={updateProgress}
+            outerToDoList={outerToDoList}
+            setOuterToDoList={setOuterToDoList}
+            handleSetDueDateClicked={handleSetDueDateClicked}
+            />))}
+            <div className='flex justify-center'>
+              <InputField 
+              inputField={inputField}
+              setinputField={setinputField}
+              handleAddInnerItem={handleAddInnerItem}
+              />
+            </div>
+          </div>
+          )
+          
+
+
         ):(
         <div className='h-auto8 flex justify-center items-left flex-col'>
           {outerToDo.innerToDoList.map(innerToDo => (
