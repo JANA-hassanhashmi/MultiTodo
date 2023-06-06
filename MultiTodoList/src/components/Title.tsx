@@ -14,8 +14,15 @@ interface Props {
 
 }
 
-const Title: React.FC<Props> = ({outerToDo, handleChangeTitle, titleField, setTitleField, titleRef, deleteOuter}) =>{
+const Title: React.FC<Props> = ({outerToDo, handleChangeTitle, titleField, setTitleField, deleteOuter, titleRef}) =>{
   return (
+
+    /*     <form
+      className="flex bg-inherit items-center"
+      onSubmit={(e) => {
+        handleChangeTitle(e);
+      }}
+    >                       */
     // eslint-disable-next-line linebreak-style
     <Card
       className="flex"
@@ -23,7 +30,7 @@ const Title: React.FC<Props> = ({outerToDo, handleChangeTitle, titleField, setTi
         backgroundColor: '#F0F0F0', height: '45px', position: 'relative', display: 'flex',
       }}
     >
-    <form
+<form
       className="flex bg-inherit items-center"
       onSubmit={(e) => {
         handleChangeTitle(e);
@@ -31,12 +38,12 @@ const Title: React.FC<Props> = ({outerToDo, handleChangeTitle, titleField, setTi
     >
       <input
         ref={titleRef}
-        type="input"
-        placeholder={outerToDo.title}
-        value={titleField}
+        type='text'
+        placeholder='Click here to edit title'
         onChange={
-        (e) => setTitleField(e.target.value)
-}
+        (e) => {
+          setTitleField(e.target.value)
+        }}
         className="px-4 py-2
         border-gray-300
         rounded
@@ -50,8 +57,7 @@ const Title: React.FC<Props> = ({outerToDo, handleChangeTitle, titleField, setTi
         outline-none"
       >
       </input>
-    </form>
-
+</form>
     <IconButton
       disableFocusRipple
       onClick={() => deleteOuter(outerToDo.id)}
