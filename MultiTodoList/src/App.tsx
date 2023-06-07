@@ -3,12 +3,18 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useState } from 'react';
 import './App.css';
+import Switch from '@mui/material/Switch';
+import React, { useState } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
 import { outerToDo } from './model';
 import OuterToDo from './components/OuterToDo';
+import ThemeToggle from './components/ThemeToggle';
+
+export const ThemeContext = React.createContext(null);
 
 function App() {
   const [outerToDoList, setOuterToDoList] = useState<outerToDo[]>([]);
@@ -19,6 +25,12 @@ function App() {
 
   const [innerID, setinnerID] = useState(0);
   const [outerId, setouterId] = useState(0);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
 
   const handleAddOuterList = () => {
     setOuterToDoList((oldValue) => [
@@ -90,7 +102,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="">
       <DialogBox
         variant="delete"
         isPopupOpen={isPopupOpen}
@@ -106,10 +118,11 @@ function App() {
       />
 
       <div className="flex flex-col md:justify-between md:flex-row mb-3">
-        <h1 className="font-sans text-3xl font-semibold text-slate-900">
+        <h1 className="font-sans text-3xl font-semibold App-header">
           Multi ToDo
         </h1>
         <div className="space-x-2 text-white inline-flex items-baselin justify-center">
+          <ThemeToggle />
           <MainButton variant="addList" handleClick={handleAddOuterList} />
           {outerToDoList.length === 0 ? (
             <MainButton
@@ -141,7 +154,7 @@ function App() {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }
 
