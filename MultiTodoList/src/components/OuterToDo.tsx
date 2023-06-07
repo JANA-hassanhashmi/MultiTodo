@@ -85,7 +85,12 @@ const OuterToDo: React.FC<Props> = ({
   return (
     <div>
       <Box>
-        <Paper variant="outlined" elevation={24} sx={{}} square>
+        <Paper
+          variant="outlined"
+          elevation={24}
+          sx={{ borderRadius: '5px' }}
+          square
+        >
           <Title
             handleChangeTitle={handleChangeTitle}
             outerToDo={outerToDo}

@@ -26,9 +26,16 @@ function App() {
   const [innerID, setinnerID] = useState(0);
   const [outerId, setouterId] = useState(0);
 
+  const [isDark, setIsDark] = useState(true);
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
+    },
+  });
+
+  const lightTheme = createTheme({
+    palette: {
+      mode: 'light',
     },
   });
 
@@ -102,59 +109,61 @@ function App() {
   };
 
   return (
-    <div className="">
-      <DialogBox
-        variant="delete"
-        isPopupOpen={isPopupOpen}
-        handleClosePopup={handleClosePopup}
-        handleAction={handleDeleteAllLists}
-      />
+    <ThemeProvider theme={() => (isDark ? darkTheme : lightTheme)}>
+      <div className="">
+        <DialogBox
+          variant="delete"
+          isPopupOpen={isPopupOpen}
+          handleClosePopup={handleClosePopup}
+          handleAction={handleDeleteAllLists}
+        />
 
-      <DialogBox
-        variant="calendar"
-        isPopupOpen={isCalendarOpen}
-        handleClosePopup={handleCloseCalendar}
-        handleAction={handleDateSet}
-      />
+        <DialogBox
+          variant="calendar"
+          isPopupOpen={isCalendarOpen}
+          handleClosePopup={handleCloseCalendar}
+          handleAction={handleDateSet}
+        />
 
-      <div className="flex flex-col md:justify-between md:flex-row mb-3">
-        <h1 className="font-sans text-3xl font-semibold App-header">
-          Multi ToDo
-        </h1>
-        <div className="space-x-2 text-white inline-flex items-baselin justify-center">
-          <ThemeToggle />
-          <MainButton variant="addList" handleClick={handleAddOuterList} />
-          {outerToDoList.length === 0 ? (
-            <MainButton
-              variant="deleteListNoList"
-              handleClick={handleDeleteClicked}
-            />
-          ) : (
-            <MainButton
-              variant="deleteList"
-              handleClick={handleDeleteClicked}
-            />
-          )}
+        <div className="flex flex-col md:justify-between md:flex-row mb-3">
+          <h1 className="font-sans text-3xl font-semibold App-header">
+            Multi ToDo
+          </h1>
+          <div className="space-x-2 text-white inline-flex items-baselin justify-center">
+            <ThemeToggle isDark={isDark} setIsDark={setIsDark} />
+            <MainButton variant="addList" handleClick={handleAddOuterList} />
+            {outerToDoList.length === 0 ? (
+              <MainButton
+                variant="deleteListNoList"
+                handleClick={handleDeleteClicked}
+              />
+            ) : (
+              <MainButton
+                variant="deleteList"
+                handleClick={handleDeleteClicked}
+              />
+            )}
+          </div>
         </div>
+
+        {outerToDoList.length === 0 ? (
+          <div className="flex items-center justify-center h-80">
+            <span>You currently have no lists.</span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+            {outerToDoList.map((outerToDo) => (
+              <OuterToDo
+                outerToDo={outerToDo}
+                outerToDoList={outerToDoList}
+                setOuterToDoList={setOuterToDoList}
+                handleSetDueDateClicked={handleSetDueDateClicked}
+              />
+            ))}
+          </div>
+        )}
       </div>
-
-      {outerToDoList.length === 0 ? (
-        <div className="flex items-center justify-center h-80 ">
-          <span>You currently have no lists.</span>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
-          {outerToDoList.map((outerToDo) => (
-            <OuterToDo
-              outerToDo={outerToDo}
-              outerToDoList={outerToDoList}
-              setOuterToDoList={setOuterToDoList}
-              handleSetDueDateClicked={handleSetDueDateClicked}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    </ThemeProvider>
   );
 }
 

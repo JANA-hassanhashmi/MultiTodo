@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { CloseRounded } from '@mui/icons-material';
-import { Card, IconButton } from '@mui/material';
+import { Card, IconButton, TextField, Typography} from '@mui/material';
 import React from 'react';
 import { outerToDo } from '../model';
 
@@ -25,9 +25,9 @@ const Title: React.FC<Props> = ({outerToDo, handleChangeTitle, titleField, setTi
     >                       */
     // eslint-disable-next-line linebreak-style
     <Card
-      className="flex"
+      className="Outer-header"
       sx={{
-        backgroundColor: '#F0F0F0', height: '45px', position: 'relative', display: 'flex',
+        height: '45px', position: 'relative', display: 'flex',
       }}
     >
 <form
@@ -36,27 +36,24 @@ const Title: React.FC<Props> = ({outerToDo, handleChangeTitle, titleField, setTi
         handleChangeTitle(e);
       }}
     >
-      <input
+      <TextField
         ref={titleRef}
-        type='text'
         placeholder='Click here to edit title'
+        variant='standard'
         onChange={
         (e) => {
           setTitleField(e.target.value)
         }}
-        className="px-4 py-2
-        border-gray-300
-        rounded
-        text-xl
-        text-black bg-inherit
-        focus:bg-amber-100
-        cursor-pointer
-        w-80
-        h-7
-        placeholder-current
-        outline-none"
-      >
-      </input>
+        sx={{
+          borderRadius:'4px',
+          padding: '0px 15px', // px-4 py-2
+          fontSize: '500rem', // text-xl
+          backgroundColor: 'inherit', // bg-inherit
+          cursor: 'pointer', // cursor-pointer
+          width: '20rem', // w-80
+          height: '10px', // h-7
+        }}
+      />
 </form>
     <IconButton
       disableFocusRipple

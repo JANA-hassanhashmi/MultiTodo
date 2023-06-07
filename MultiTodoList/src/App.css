@@ -7,6 +7,8 @@
 body {
   --color-background: #fafafa;
   --color-foreground: #1f2023;
+  --outer-header-background:#F0F0F0;
+
 }
 
 body.dark {
@@ -28,6 +30,11 @@ body.dark {
 
 
 .App-header {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.Outer-header {
   background-color: var(--color-background);
   color: var(--color-foreground);
 }

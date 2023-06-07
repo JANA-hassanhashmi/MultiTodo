@@ -3,9 +3,8 @@ import { Switch, styled } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
-
+// eslint-disable-next-line react/prop-types
+function ThemeToggle({ isDark, setIsDark }) {
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -24,13 +23,12 @@ function ThemeToggle() {
         },
         '& + .MuiSwitch-track': {
           opacity: 1,
-          backgroundColor:
-            theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+          backgroundColor: isDark ? '#8796A5' : '#aab4be',
         },
       },
     },
     '& .MuiSwitch-thumb': {
-      backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
+      backgroundColor: isDark ? '#003892' : '#001e3c',
       width: 32,
       height: 32,
       '&:before': {
@@ -49,7 +47,7 @@ function ThemeToggle() {
     },
     '& .MuiSwitch-track': {
       opacity: 1,
-      backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+      backgroundColor: isDark ? '#8796A5' : '#aab4be',
       borderRadius: 20 / 2,
     },
   }));
