@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import './App.css';
 import Switch from '@mui/material/Switch';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { useMediaQuery } from 'react-responsive';
@@ -27,7 +27,7 @@ function App() {
   const [innerID, setinnerID] = useState(0);
   const [outerId, setouterId] = useState(0);
 
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
@@ -39,6 +39,14 @@ function App() {
       mode: 'light',
     },
   });
+
+  useEffect(() => {
+    if (isDark) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [isDark]);
 
   const handleAddOuterList = () => {
     setOuterToDoList((oldValue) => [
