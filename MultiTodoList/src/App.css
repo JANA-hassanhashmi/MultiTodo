@@ -29,12 +29,4 @@ body.dark {
 }
 
 
-.App-header {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-}
 
-.Outer-header {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-}

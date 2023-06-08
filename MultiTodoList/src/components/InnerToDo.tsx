@@ -149,8 +149,8 @@ const InnerToDo: React.FC<Props> = ({
         ?.dueDate !== '' ? (
         <div className="">
           <Divider variant="middle" />
-          <div className="inline-flex justify-items-start ">
-            <span className="text-black font-bold text-sm"> Due on: </span>
+          <div className="inline-flex">
+            <Typography> Due on: </Typography>
             <span className="text-gray-400">
               {
                 outerToDoList
