@@ -8,6 +8,7 @@ import Switch from '@mui/material/Switch';
 import React, { useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { useMediaQuery } from 'react-responsive';
 import MainButton from './components/MainButton';
 import DialogBox from './components/DialogBox';
 import { outerToDo } from './model';
@@ -107,6 +108,15 @@ function App() {
     setOuterToDoList(updatedOuterList);
     setIsCalendarOpen(false);
   };
+
+  const darkPrefered = useMediaQuery(
+    {
+      query: '(prefers-color-scheme: dark)',
+    },
+    undefined,
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    (isDark) => setIsDark(isDark)
+  );
 
   return (
     <ThemeProvider theme={() => (isDark ? darkTheme : lightTheme)}>

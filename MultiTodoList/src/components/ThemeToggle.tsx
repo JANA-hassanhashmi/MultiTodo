@@ -52,14 +52,6 @@ function ThemeToggle({ isDark, setIsDark }) {
     },
   }));
 
-  const darkPrefered = useMediaQuery(
-    {
-      query: '(prefers-color-scheme: dark)',
-    },
-    undefined,
-    (isDark) => setIsDark(!isDark)
-  );
-
   useEffect(() => {
     if (isDark) {
       document.body.classList.add('dark');
@@ -71,8 +63,8 @@ function ThemeToggle({ isDark, setIsDark }) {
   return (
     <div>
       <MaterialUISwitch
-        checked={isDark}
-        onChange={({ target }) => setIsDark(target.checked)}
+        checked={!isDark}
+        onChange={({ target }) => setIsDark(!target.checked)}
         aria-label="Dark mode toggle"
       />
     </div>
